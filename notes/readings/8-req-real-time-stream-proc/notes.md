@@ -1,0 +1,10 @@
+# Notes on 'The 8 Requirements of Real-Time Stream Processing'
+
+* Keep the data moving - The first requirement for a real-time stream processing system is to process messages “in-stream”, without any requirement to store them to perform any operation or sequence of operations. Ideally the system should also use an active (i.e., non-polling) processing model.
+* Query using SQL on Streams - Supports a high-level 'StreamSQL' language with built-in extensible stream-oriented primitives and operators.
+* Handle Stream Imperfections (Delayed, Missing and Out-of-order data) - The third requirement is to have built-in mechanisms to provide resiliency against stream “imperfections”, including missing and out-of-order data, which are commonly present in real-world data streams.
+* Generate Predictable Outcomes - The fourth requirement is that a stream processing engine must guarantee predictable and repeatable outcomes.
+* Integrate Stored and Streaming Data - The fifth requirement is to have the capability to efficiently store, access, and modify state information, and combine it with live streaming data. For seamless integration, the system should use a uniform language when dealing with either type of data.
+* Guarantee Data Safety and Availability - The sixth requirement is to ensure that the applications are up and available, and the integrity of the data maintained at all times, despite failures
+* Partition and Scale Applications Automatically - The seventh requirement is to have the capability to distribute processing across multiple processors and machines to achieve incremental scalability. Ideally, the distribution should be automatic and transparent.
+* Process and Respond Instantaneously - The eighth requirement is that a stream processing system must have a highly-optimized, minimal-overhead execution engine to deliver real-time response for high-volume applications. *To make sure that a system can meet this requirement, it is imperative that any user with a high-volume streaming application carefully test any product he might consider for throughput and latency on his target workload*
