@@ -1,0 +1,90 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[urw-garamond]{mathdesign}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+
+\begin{document}
+
+\title{PhD Status Update}
+\author{Milinda Pathirage}
+
+\maketitle
+
+\section{IBM Research Internship}
+
+I worked on IBM Workflow As A Service
+(\url{https://www.ng.bluemix.net/docs/#services/workflow/index.html#workflow})
+during the first 6 months of my internship. This service is built on
+top of Docker(\url{http://docker.io}) and lightweight workflow engine
+developed by IBM. Multitenancy is implemented by creating instances of
+workflow engine for each user. So in this environment, each user of
+workflow service will have one or more workflow engine created for
+him. This workflow engine instance will get geo-replicated for
+availability and custom request router backed by Zookeeper cluster
+hides the fact that there are multiple instances of workflow engine
+running to handle failures and load. IBM group is still working on the
+Zookeeper based geo-replicated workflow engine implementation. Current
+production version doesn't support that. \textbf{I mainly worked on workflow
+language, performance tuning and fixing service provider and consumer
+layers.}
+
+During last 6 months I was working on implementing multi-tenant
+monitoring and analytics platform for workflow service with support
+for both real-time(streaming) and batch analytics. The basic
+architecture includes a JSON API for event capturing, Kafka based
+messaging platform for delivering events to analytics and persistence
+backends. The analytics backend should support hybrid queries where it
+converts queries written by user to both stream queries and batch
+jobs. Query engine should schedule streaming jobs and batch jobs
+according to the user's query and should be able combine real-time and
+batch views to generate final output. I first explore the option of
+using Elasticsearch to handle this hybrid monitoring and analytics but
+have to abondoned it due to limited real-time querying support. But we
+decided to use Elasticsearch as persistence storage for batch
+layer. Then I tried to use Twitter's
+Summingbird(\url{http://www.vldb.org/pvldb/vol7/p1441-boykin.pdf})
+which implements 'Big Data Lambda
+Architecture'(\url{http://lambda-architecture.net/}). Twitter is using
+this for their analytics platform
+(\url{https://blog.twitter.com/2014/tsar-a-timeseries-aggregator}).
+I couldn't get it to work with other parts of our system and we
+decided to drop it as analytics backend due to its
+strong dependency on static type system of Scala to provide some of
+the features the analytics platform requires. We decided to go with
+plain Apache Storm and Apache Hadoop based solution. When these tasks
+were completed I was in my last week of internship and we have
+following plan to continue this work.
+
+
+\begin{itemize}
+  \item Do a performance study to indentify Apache Storm's performance
+    characteristics. The main research question in this is how will
+    Apache Storm will behave in multi-user environment. How we can
+    ensure service level agreements. Fair scheduling stream analytics
+    jobs from multiple users. Can current Apache Storm implementation
+    handle this.
+  \item Simple SQL like query layer which implements concepts in
+    'Lambda Architecture'. Summingbid has implements basic query
+    layer. But users have to write queries in Scala and not intended
+    for general use. Main challenge in this is how we can utilize
+    previous work on streaming SQL, CQL, Pig and Hive to implement
+    query language for business process analytics and monitoring.
+\end{itemize}
+
+
+
+\section{Multi-tenant Distributed Stream Processing}
+
+Most of the things related to multi-tenant distributed stream
+processing is described above. Yahoo has implemented security layer for
+Apache Storm to support multitenancy. On top of that, we can
+study scalability issues, scheduling strategies, performance and fault
+tolerance of multi-tenant distributed stream processing platform.
+
+\section{Current Projects}
+
+\begin{itemize}
+\end{itemize}
+
+\end{document}
