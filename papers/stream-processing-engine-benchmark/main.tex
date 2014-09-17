@@ -89,58 +89,32 @@ Amazon Dynamo~\cite{decandia2007dynamo} and distributed data processing framewor
 As the trend continues, these systems which follow traditional pull based approach
 to answering queries couldn't handle the latency requirements and throughput requirements,
 \textit{Distributed Stream Processing} platforms were built on top of modern messaging
-infrastructures to fulfill these requirements. Even though basics used
-to built these platforms were  not new, these new
-platforms were built to handle massive rates of data with sub second latency. \textit{Need to say
- something about Map-Reduce platform related techs contributions. And
- need to say these platforms are based on previous research but with
- the experience developing big data platforms.}
+infrastructures to fulfill these requirements. While most of these new
+distributed stream processing frameworks are inspired by Map-Reduce
+and related big data technologies, most of the underlying concepts
+were from previous work.\textcolor{Red}{Add references and fix this.}
 \end{sloppypar}
 
-%Real-time stream processing is used in various scenarios
-%expanding across social network monitoring, fraud detection, real-time
-%analytics, electronic trading, sensor networks, military applications
-%and internet of things applications. But there is a increasing
-%interest on real-time stream processing in the context of internet
-%applications such as social networks, electronic commerce and cloud
-%monitoring. Some of the big internet companies have invented their own
-%distributed stream processing frameworks~\cite{akidau2013millwheel}~\cite{murray2013naiad}  to be
-%competitive with each other or they are collaborating through open source foundations to
-%build next generation distributed stream processing frameworks~\cite{asf:2014:samza}~\cite{neumeyer2010s4}~\cite{toshniwal2014storm}. Apache
-%Storm and Apache Samza~\cite{asf:2014:samza} are two examples for collaborative efforts from
-%vaiours internet age companies.
+With this trend of moving to push based streaming processing platforms
+for reducing the latency and to handle increasing throughput
+requirements, several distributed and single-node stream processing
+platforms were implemented and they are continue to evolve to tackle
+ever changing requirements. But due to different architectural
+decisions underlying these platforms and variations in problem classes and
+non-functional requirements these frameworks are trying to address,
+these frameworks behave differently under different types of data and
+algorithms. \textcolor{Red}{Need references.} Also these systems
+support different types of programming abstractions. These variations
+make the decision of selecting a specific platform hard. Although
+there are existing results on how these platforms perform
+individually \textcolor{Red}{(Need references.)}, but its hard to find
+comparative studies. In this paper, we present a comprehensive
+framework for analyzing and comparing distributed stream processing
+platforms. Further, we implement benchmark algorithms from our
+ framework on several popular stream processing platforms and present
+ our findings evaluating their performance.
 
-%For example
-%Yahoo~\cite{hortonworks:2014:storm} has one of the biggest Apache Storm deployment in the
-%world, Twitter is using Apache Storm in their hybrid analytics
-%platform TSAR~\cite{twitter:2014:tsar}.
 
-%With this push from large organizations, and contributions from some
-%of these organizations like Twitter~\cite{toshniwal2014storm},
-%Yahoo~\cite{neumeyer2010s4}, LinkedIn and as a
-%result of research~\cite{zaharia2013discretized}
-%from academic institutions like University of California, Berkeley
-%there are multiple popular open source distributed processing frameworks
-%available today. And lots of other organizations have started to utilize
-% these event stream processing frameworks in their IT infrastructures.
-% \textcolor{Red}{\textbf{Fix above.}}
-
-%Due to various differences in business requirements and existing
-%IT infrastructure in place, above mentioned event stream processing
-%systems were designed and implemented with different properties. They
-%each support different programming models, has different gurantees about
-% scalability, fault tolerance, and etc. And some~\cite{asf:2014:samza} were implemented based on
-% specific messaging infrastructures. New users, often faced various difficulties
-% when trying to select one of these technologies to solve their own problems.
-% This is mainly due to lack of comparative studies on these systems.
-
- \textcolor{Red}{\textbf{Talked about existing streaming benchmarks.}}
-
- \textcolor{Red}{\textbf{Define what we are going to do.}}
-
- \textcolor{Red}{\textbf{Our contributions.}}
-
- \textcolor{Red}{\textbf{Structure of the paper.}}
 
  \subsection{Event Stream Processing Tasks}
 
@@ -166,14 +140,6 @@ From~\cite{streamdrill:presentation}
 \end{itemize}
 
 
-\begin{itemize}
-
-  \item Why stream processing is widely used now?
-  \item In which domains, stream processing is used.
-  \item Why it is important to benchmark or do a emperical study of
-    stream processing engines.
-  \item What are our contributions
-\end{itemize}
 
 \bibliographystyle{abbrv}
 \bibliography{main}
