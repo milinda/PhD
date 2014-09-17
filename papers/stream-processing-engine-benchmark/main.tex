@@ -71,7 +71,7 @@ Beth Plale\\
 
 \section{Introduction}
 Internet has become a central part of our daily lives and recent developments in
-\texit{Smart Phones}, \textit{Internet of Things} and \textit{Smart Homes} related
+\textit{Smart Phones}, \textit{Internet of Things} and \textit{Smart Homes} related
 technologies are going to make us more connected through Internet more than ever.
 As more and more people and devices are connected together via web applications which
 Internet is built, these application will produce massive amount of data at rates which
@@ -79,53 +79,60 @@ we haven't experienced yet. In parallel to the increase of data generation, busi
 entities and users require this data and information extracted or created out of this data
 available to them as fast as possible and trending towards decreasing latency for ever.
 
-As we have experienced in recent past, traditional relation database technologies couldn't
+\begin{sloppypar}
+As we have experienced in recent past, traditional relational database
+technologies couldn't
 cope up with these ever increasing data rates, volumes and ever decreasing latency. So technology
-giants like Google and Amazon invented and introduced  set of storage technologies known as
-NoSQL databases and new large scale data processing paradigm known as \textbf{Map-Reduce}.
-As the trends continue, these systems which follow pull based approach
+giants like Google, Yahoo and Amazon invented  novel storage
+technologies like GFS~\cite{ghemawat2003google}, HDFS, Big Table~\cite{chang2008bigtable} and
+Amazon Dynamo~\cite{decandia2007dynamo} and distributed data processing frameworks such as Map-Reduce~\cite{dean2010mapreduce}.
+As the trend continues, these systems which follow traditional pull based approach
 to answering queries couldn't handle the latency requirements and throughput requirements,
 \textit{Distributed Stream Processing} platforms were built on top of modern messaging
-infrastructures. Even though basics used to built these platforms were not new, these new
+infrastructures to fulfill these requirements. Even though basics used
+to built these platforms were  not new, these new
 platforms were built to handle massive rates of data with sub second latency. \textit{Need to say
- something about Map-Reduce platform related techs contributions.}
+ something about Map-Reduce platform related techs contributions. And
+ need to say these platforms are based on previous research but with
+ the experience developing big data platforms.}
+\end{sloppypar}
 
-Real-time stream processing is used in various scenarios
-expanding across social network monitoring, fraud detection, real-time
-analytics, electronic trading, sensor networks, military applications
-and internet of things applications. But there is a increasing
-interest on real-time stream processing in the context of internet
-applications such as social networks, electronic commerce and cloud
-monitoring. Some of the big internet companies have invented their own
-distributed stream processing frameworks~\cite{akidau2013millwheel}~\cite{murray2013naiad}  to be
-competitive with each other or they are collaborating through open source foundations to
-build next generation distributed stream processing frameworks~\cite{asf:2014:samza}~\cite{neumeyer2010s4}~\cite{toshniwal2014storm}. Apache
-Storm and Apache Samza~\cite{asf:2014:samza} are two examples for collaborative efforts from
-vaiours internet age companies.
+%Real-time stream processing is used in various scenarios
+%expanding across social network monitoring, fraud detection, real-time
+%analytics, electronic trading, sensor networks, military applications
+%and internet of things applications. But there is a increasing
+%interest on real-time stream processing in the context of internet
+%applications such as social networks, electronic commerce and cloud
+%monitoring. Some of the big internet companies have invented their own
+%distributed stream processing frameworks~\cite{akidau2013millwheel}~\cite{murray2013naiad}  to be
+%competitive with each other or they are collaborating through open source foundations to
+%build next generation distributed stream processing frameworks~\cite{asf:2014:samza}~\cite{neumeyer2010s4}~\cite{toshniwal2014storm}. Apache
+%Storm and Apache Samza~\cite{asf:2014:samza} are two examples for collaborative efforts from
+%vaiours internet age companies.
 
-For example
-Yahoo~\cite{hortonworks:2014:storm} has one of the biggest Apache Storm deployment in the
-world, Twitter is using Apache Storm in their hybrid analytics
-platform TSAR~\cite{twitter:2014:tsar}.
+%For example
+%Yahoo~\cite{hortonworks:2014:storm} has one of the biggest Apache Storm deployment in the
+%world, Twitter is using Apache Storm in their hybrid analytics
+%platform TSAR~\cite{twitter:2014:tsar}.
 
-With this push from large organizations, and contributions from some
-of these organizations like Twitter~\cite{toshniwal2014storm},
-Yahoo~\cite{neumeyer2010s4}, LinkedIn and as a
-result of research~\cite{zaharia2013discretized}
-from academic institutions like University of California, Berkeley
-there are multiple popular open source distributed processing frameworks
-available today. And lots of other organizations have started to utilize
- these event stream processing frameworks in their IT infrastructures.
- \textcolor{Red}{\textbf{Fix above.}}
+%With this push from large organizations, and contributions from some
+%of these organizations like Twitter~\cite{toshniwal2014storm},
+%Yahoo~\cite{neumeyer2010s4}, LinkedIn and as a
+%result of research~\cite{zaharia2013discretized}
+%from academic institutions like University of California, Berkeley
+%there are multiple popular open source distributed processing frameworks
+%available today. And lots of other organizations have started to utilize
+% these event stream processing frameworks in their IT infrastructures.
+% \textcolor{Red}{\textbf{Fix above.}}
 
-Due to various differences in business requirements and existing
-IT infrastructure in place, above mentioned event stream processing
-systems were designed and implemented with different properties. They
-each support different programming models, has different gurantees about
- scalability, fault tolerance, and etc. And some~\cite{asf:2014:samza} were implemented based on
- specific messaging infrastructures. New users, often faced various difficulties
- when trying to select one of these technologies to solve their own problems.
- This is mainly due to lack of comparative studies on these systems.
+%Due to various differences in business requirements and existing
+%IT infrastructure in place, above mentioned event stream processing
+%systems were designed and implemented with different properties. They
+%each support different programming models, has different gurantees about
+% scalability, fault tolerance, and etc. And some~\cite{asf:2014:samza} were implemented based on
+% specific messaging infrastructures. New users, often faced various difficulties
+% when trying to select one of these technologies to solve their own problems.
+% This is mainly due to lack of comparative studies on these systems.
 
  \textcolor{Red}{\textbf{Talked about existing streaming benchmarks.}}
 
