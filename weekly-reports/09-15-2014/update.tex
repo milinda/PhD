@@ -1,0 +1,73 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[urw-garamond]{mathdesign}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+
+\begin{document}
+
+\title{Weekly Report - 09/08/2014 to 09/12/2014}
+\author{Milinda Pathirage}
+
+\maketitle
+
+\section{Distributed Stream Processing Framework Performance Study}
+
+Didn't get that much time during last week to work on the paper. But I
+worked on reading some related materials~\cite{desurvey}~\cite{dimsonhailstorm}~\cite{guo2013well} and writing the introduction
+of the paper. I got the idea for the paper from the IPDPS
+paper~\cite{guo2013well}.
+
+Studying performance and other characteristics of distributed stream
+processing frameworks is interesting because availability of multiple
+frameworks~\cite{toshniwal2014storm}~\cite{asf:2014:samza}~\cite{neumeyer2010s4} ~\cite{zaharia2013discretized,}~\cite{akidau2013millwheel}
+from different companies with each having different view
+about the way to tackle this problem and differences in the internal
+architecture of these frameworks. For example, Spark Streaming is
+developed on top of Spark's RDD~\cite{zaharia2012resilient} data
+structure and operates on batches of tuples where as Apache Storm
+allows developer to process individual tuples at the lowest level and
+batches using high-level programming API. I want to explore the
+implications these different architectures have on different types of
+stream processing topologies and different types of streaming data.
+
+
+\section{HTRC}
+
+\begin{itemize}
+  \item Adding \textbf{Single Log Out} support to
+    pac4j(\url{https://github.com/milinda/pac4j/tree/pac4j-1.5.1-htrc})
+    open source library to use with HTRC Portal. Samitha tried this
+    library for Single Sign On and found out that \textit{Single Log Out} and
+    \textit{SAML2 OAuth2 Grant Type} are not available in this library. Even
+    though these extra functionality is not there this is the only
+    library she found which has other required functionalities and
+    ease of use.  I am patching this library to add missing
+    functionality so that Samitha can use it in Portal.
+  \item Designed the IPython Cluster management API for HTRC IPython
+    support and start implementing the API.
+  \item Designed HTRC Github Project Structure. Couldn't send it to the
+    tech list yet. Planning to send it to IU HTRC list first with
+    detailed description. Below is the source code structure for
+    Github:
+    \begin{itemize}
+    \item HTRC-Community: Samples, UnCamp Code, etc. comes under this.
+    \item Deprecated: All the old code (currently unused) goes here
+    \item HTRC-Commons: Reusable Libraries for HTRC Platform. One good example is OAuth2 Servelet Filter.
+    \item HTRC-Portal
+    \item HTRC-BlackLight
+    \item HTRC-Bookworm
+    \item HTRC-DataAPI
+    \item HTRC-SolrProxy
+    \item HTRC-CoreServices: Services and APIs internal to HTRC. Agent, Registry API goes here.
+    \item HTRC-ToolsAndUtilities: Internal tools like log-analyzer will reside here.
+    \end{itemize}
+    Main idea behind above structure is having separate Github
+    projects for public facing components and group internal
+    components based on their functionality.
+\end{itemize}
+
+\bibliographystyle{abbrv}
+\bibliography{update}
+
+\end{document}
