@@ -41,9 +41,8 @@ Beth Plale\\
 
 \maketitle
 \begin{abstract}
-Interest on real-time query processing and processing of continuous
-streams of data has increased over last couple of years due to the need
-of derving actionable information as soon as possible
+  Interest on continuous queries on streams of data has increased over last couple of years due to
+  the need of derving actionable information as soon as possible
  to be competitive in the fast moving world. As a result of the limitations
  in batch processing technologies from previous generation, distributed
  stream processing systems like Yahoo's \textit{S4}, Twitter's \textit{Storm}, \textit{Spark
@@ -71,6 +70,26 @@ of derving actionable information as soon as possible
 %\keywords{Fix this.}
 
 \section{Introduction}
+Internet has become a central part of our daily lives and recent developments in
+\texit{Smart Phones}, \textit{Internet of Things} and \textit{Smart Homes} related
+technologies are going to make us more connected through Internet more than ever.
+As more and more people and devices are connected together via web applications which
+Internet is built, these application will produce massive amount of data at rates which
+we haven't experienced yet. In parallel to the increase of data generation, business
+entities and users require this data and information extracted or created out of this data
+available to them as fast as possible and trending towards decreasing latency for ever.
+
+As we have experienced in recent past, traditional relation database technologies couldn't
+cope up with these ever increasing data rates, volumes and ever decreasing latency. So technology
+giants like Google and Amazon invented and introduced  set of storage technologies known as
+NoSQL databases and new large scale data processing paradigm known as \textbf{Map-Reduce}.
+As the trends continue, these systems which follow pull based approach
+to answering queries couldn't handle the latency requirements and throughput requirements,
+\textit{Distributed Stream Processing} platforms were built on top of modern messaging
+infrastructures. Even though basics used to built these platforms were not new, these new
+platforms were built to handle massive rates of data with sub second latency. \textit{Need to say
+ something about Map-Reduce platform related techs contributions.}
+
 Real-time stream processing is used in various scenarios
 expanding across social network monitoring, fraud detection, real-time
 analytics, electronic trading, sensor networks, military applications
@@ -82,12 +101,12 @@ distributed stream processing frameworks~\cite{akidau2013millwheel}~\cite{murray
 competitive with each other or they are collaborating through open source foundations to
 build next generation distributed stream processing frameworks~\cite{asf:2014:samza}~\cite{neumeyer2010s4}~\cite{toshniwal2014storm}. Apache
 Storm and Apache Samza~\cite{asf:2014:samza} are two examples for collaborative efforts from
-vaiours internet age companies. 
+vaiours internet age companies.
 
 For example
 Yahoo~\cite{hortonworks:2014:storm} has one of the biggest Apache Storm deployment in the
 world, Twitter is using Apache Storm in their hybrid analytics
-platform TSAR~\cite{twitter:2014:tsar}. 
+platform TSAR~\cite{twitter:2014:tsar}.
 
 With this push from large organizations, and contributions from some
 of these organizations like Twitter~\cite{toshniwal2014storm},
