@@ -1,0 +1,63 @@
+\documentclass{sig-alternate}
+
+%\usepackage[urw-garamond]{mathdesign}
+%\usepackage[T1]{fontenc}
+
+\usepackage{hyperref}
+
+
+% SIG Alternate copyright removal
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\maketitle}{\@copyrightspace}{}{}{}
+\makeatother
+
+\usepackage[usenames,dvipsnames]{color}
+
+
+\begin{document}
+%
+% --- Author Metadata here ---
+\CopyrightYear{2014} % Allows default copyright year (20XX) to be over-ridden - IF NEED BE.
+%\crdata{0-12345-67-8/90/01}  % Allows default copyright data (0-89791-88-6/97/05) to be over-ridden - IF NEED BE.
+% --- End of Author Metadata ---
+
+\title{Benchmark Suite to Evaluate Performance of Distributed Stream
+  Processing Platforms}
+
+\numberofauthors{2}
+
+\author{
+% 1st. author
+\alignauthor
+Milinda Pathirage\\
+       \affaddr{School of Informatics and Computing}\\
+       \affaddr{Indiana University}\\
+       \email{mpathira@indiana.edu}
+% 2nd. author
+\alignauthor
+Beth Plale\\
+       \affaddr{School of Informatics and }\\
+       \affaddr{Indiana University}\\
+       \email{plale@cs.indiana.edu}
+}
+
+\maketitle
+\begin{abstract}
+  Interest on continuous queries on streams of data has increased over last couple of years due to
+  the need of derving actionable information as soon as possible
+ to be competitive in the fast moving world. As a result of the limitations
+ in batch processing technologies from previous generation, distributed
+ stream processing systems like Yahoo's \textit{S4}, Twitter's \textit{Storm}, \textit{Spark
+ Streaming} were introduced into the fast growing Big Data eco-system.
+ Even though there are various different stream processing platforms
+ and frameworks on top of them with different capabilities and
+ characteristics, in-depth comparative studies of performance, scalability and
+ reliability has never been done. Users of these system often face
+ difficulties when choosing a system as a solution to a task at hand.
+ In this paper we use some of the popular distributed stream
+ processing use cases we identified by going through mailing list
+ discussions, presentations and publication to evaluate three (
+ \textit{Storm, Spark Streaming, Samza}) of the
+ most popular distributed processing systems used widely today.
+\end{abstract}
