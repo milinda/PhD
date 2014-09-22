@@ -1,60 +1,16 @@
 # Introduction
 
 Internet has become a central part of our daily lives and recent developments in
-*Smart Phones*, *Internet of Things* and *Smart Homes* related
-technologies are going to make us more connected through Internet more than ever.
-As more and more people and devices are connected together via web applications which
-Internet is built, these application will produce massive amount of data at rates which
-we haven't experienced yet. In parallel to the increase of data generation, business
-entities and users require this data and information extracted or created out of this data
-available to them as fast as possible and trending towards decreasing latency for ever.
-
+*Smart Phones*, *Internet of Things* and *Smart Homes* related technologies are going to make us more connected through Internet more than ever. As more and more people and devices are connected together via web applications which Internet is built, these application will produce massive amount of data at rates which we haven't experienced yet. In parallel to the increase of data generation, business entities and users require this data and information extracted or created out of this data available to them as fast as possible and trending towards decreasing latency for ever.
 
 As we have experienced in recent past, traditional relational database
-technologies couldn't
-cope up with these ever increasing data rates, volumes and ever decreasing latency. So technology
-giants like Google, Yahoo and Amazon invented  novel storage
-technologies like GFS~\cite{ghemawat2003google}, HDFS, Big Table~\cite{chang2008bigtable} and
-Amazon Dynamo~\cite{decandia2007dynamo} and distributed data processing frameworks such as Map-Reduce~\cite{dean2010mapreduce}.
-As the trend continues, these systems which follow traditional pull based approach
-to answering queries couldn't handle the latency requirements and throughput requirements,
-*Distributed Stream Processing* platforms were built on top of modern messaging
-infrastructures to fulfill these requirements. While most of these new
-distributed stream processing frameworks are inspired by Map-Reduce
-and related big data technologies, most of the underlying concepts
+technologies couldn't cope up with these ever increasing data rates, volumes and ever decreasing latency. So technology giants like Google, Yahoo and Amazon invented  novel storage technologies like GFS \cite{ghemawat2003google}, HDFS, Big Table \cite{chang2008bigtable} and Amazon Dynamo \cite{decandia2007dynamo} and distributed data processing frameworks such as Map-Reduce \cite{dean2010mapreduce}. As the trend continues, these systems which follow traditional pull based approach to answering queries couldn't handle the latency requirements and throughput requirements, *Distributed Stream Processing* platforms were built on top of modern messaging infrastructures to fulfill these requirements. While most of these new distributed stream processing frameworks are inspired by Map-Reduce and related big data technologies, most of the underlying concepts
 were from previous work.\textcolor{Red}{Add references and fix this.}
 
-
 With this trend of moving to push based streaming processing platforms
-for reducing the latency and to handle increasing throughput
-requirements, several distributed and single-node stream processing
-platforms were implemented and they are continue to evolve to tackle
-ever changing requirements. But due to different architectural
-decisions underlying these platforms and variations in problem classes and
-non-functional requirements these frameworks are trying to address,
-these frameworks behave differently under different types of data and
-algorithms. \textcolor{Red}{Need references.} Also these systems
-support different types of programming abstractions. These variations
-make the decision of selecting a specific platform hard. Although
-there are existing results on how these platforms perform
-individually \textcolor{Red}{(Need references.)}, but its hard to find
-comparative studies. In this paper, we present a comprehensive
-framework for analyzing and comparing distributed stream processing
-platforms. Further, we implement benchmark algorithms from our
- framework on several popular stream processing platforms and present
- our findings evaluating their performance, scalability, fault tolerance
- and ease of use.
+for reducing the latency and to handle increasing throughput requirements, several distributed and single-node stream processing platforms were implemented and they are continue to evolve to tackle ever changing requirements. But due to different architectural decisions underlying these platforms and variations in problem classes and non-functional requirements these frameworks are trying to address, these frameworks behave differently under different types of data and algorithms. \textcolor{Red}{Need references.} Also these systems support different types of programming abstractions. These variations make the decision of selecting a specific platform hard. Although there are existing results on how these platforms perform individually \textcolor{Red}{(Need references.)}, but its hard to find comparative studies. In this paper, we present a comprehensive framework for analyzing and comparing distributed stream processing platforms. Further, we implement benchmark algorithms from our framework on several popular stream processing platforms and present our findings evaluating their performance, scalability, fault tolerance and ease of use.
 
- We envision that, having defined framework and set of benchmark applications
- will help stream analysts and developers who requires to use these systems to
- make informed decisions. However functional and non-functional characteristics
- of stream processing systems depends mainly on types of data, streaming analysis
- task, stream processing platform and the infrastructure used (persistence storage
- used to store output, messaging middleware used to deliver data streams). However,
- we keep the infrastructure constant across stream processing platforms during our
- experiments and propose a framework which can use to analyze stream processing
- platforms across three dimensions *type of streaming data, stream processing
-   algorithms,* and *stream processing platform*.
+We envision that, having defined framework and set of benchmark applications will help stream analysts and developers who requires to use these systems to make informed decisions. However functional and non-functional characteristics  of stream processing systems depends mainly on types of data, streaming analysis task, stream processing platform and the infrastructure used (persistence storage used to store output, messaging middleware used to deliver data streams). However, we keep the infrastructure constant across stream processing platforms during our experiments and propose a framework which can use to analyze stream processing platforms across three dimensions *type of streaming data, stream processing algorithms,* and *stream processing platform*.
 
 # Methodology
 
