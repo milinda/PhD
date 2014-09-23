@@ -23,7 +23,7 @@ build=$cwd/.md2latex/build
 cp $1 $mdfile
 
 # Run Pandoc to turn the markdown file with the bulk of the document into a .TeX file
-pandoc -f markdown+grid_tables+simple_tables --latex-engine=pdflatex -R -i $mdfile  -o $texout
+pandoc -f markdown+grid_tables+simple_tables --latex-engine=xelatex -R -i $mdfile  -o $texout
 
 # Remove some of the junk that Markdown adds when converting to TeX.
 sed -i .bak 's/\[<+->\]//g' $texout
@@ -42,7 +42,7 @@ cp -r $cwd/*.bib $build
 cd $build
 
 # Build PDF
-latexmk final.tex -pdf -pdflatex="pdflatex -interaction=nonstopmode"
+latexmk final.tex -pdf -pdflatex="xelatex -interaction=nonstopmode"
 
 # Copy the PDF back
 cp final.pdf $cwd
