@@ -16,3 +16,10 @@ We envision that, having defined set of benchmark applications and a benchmarkin
 **Stream Processing Platform** - There are several different stream processing platforms available, both commercial and open source. \textcolor{Red}{Mention about several commercial, research and open source DSPs.} In this paper we are focusing only on Apache Storm, Apache Samza and Apache Spark Streaming. We believe that our approach is applicable to any other stream processing platform as well.
 
 # Methodology
++-----------+------------+
+| Algorithm | Complexity |
++-----------+------------+
+| Averages  | Low        |
++-----------+------------+
+| Fraud Detection | High |
++-----------------+------+
