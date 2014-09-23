@@ -16,22 +16,9 @@ We envision that, having defined set of benchmark applications and a benchmarkin
 **Stream Processing Platform** - There are several different stream processing platforms available, both commercial and open source. \textcolor{Red}{Mention about several commercial, research and open source DSPs.} In this paper we are focusing only on Apache Storm, Apache Samza and Apache Spark Streaming. We believe that our approach is applicable to any other stream processing platform as well.
 
 # Methodology
-+-----------------+------------+
-| Algorithm       | Complexity |
-+=================+============+
-| Averages        | Low        |
-+-----------------+------------+
-| Fraud Detection | High       |
-+-----------------+------------+
 
-: Sample grid table.
-
-+---------------+---------------+--------------------+
-| Fruit         | Price         | Advantages         |
-+===============+===============+====================+
-| Bananas       | $1.34         | - built-in wrapper |
-|               |               | - bright color     |
-+---------------+---------------+--------------------+
-| Oranges       | $2.10         | - cures scurvy     |
-|               |               | - tasty            |
-+---------------+---------------+--------------------+
+  Right     Left     Center     Default
+-------     ------ ----------   -------
+     12     12        12            12
+    123     123       123          123
+      1     1          1             1

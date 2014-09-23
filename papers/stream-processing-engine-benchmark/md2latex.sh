@@ -23,7 +23,7 @@ build=$cwd/.md2latex/build
 cp $1 $mdfile
 
 # Run Pandoc to turn the markdown file with the bulk of the document into a .TeX file
-pandoc -f markdown+grid_tables --latex-engine=pdflatex -R -i $mdfile  -o $texout
+pandoc -f markdown+grid_tables+simple_tables --latex-engine=pdflatex -R -i $mdfile  -o $texout
 
 # Remove some of the junk that Markdown adds when converting to TeX.
 sed -i .bak 's/\[<+->\]//g' $texout
