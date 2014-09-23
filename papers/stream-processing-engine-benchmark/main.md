@@ -21,4 +21,17 @@ We envision that, having defined set of benchmark applications and a benchmarkin
 -------     ------ ----------   -------
      12     12        12            12
     123     123       123          123
-      1     1          1             1
+    1     1          1             1
+
+
+: Sample grid table.
+
++---------------+---------------+--------------------+
+| Fruit         | Price         | Advantages         |
++===============+===============+====================+
+| Bananas       | $1.34         | - built-in wrapper |
+|               |               | - bright color     |
++---------------+---------------+--------------------+
+| Oranges       | $2.10         | - cures scurvy     |
+|               |               | - tasty            |
++---------------+---------------+--------------------+
