@@ -50,4 +50,8 @@ cp final.pdf $cwd
 cd $cwd
 
 # Open the PDF generated in my PDF reader of choice
-evince final.pdf
+if [ "$(uname)" == "Darwin" ]; then
+    open final.pdf
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    evince final.pdf
+fi

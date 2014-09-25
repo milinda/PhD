@@ -22,4 +22,18 @@ Described what we are trying to don in this paper.
 
 Then our contributions.
 
-# Methodology
+# Benchmarking Framework and Methodology
+
+## Benchmarks
+
+**TODO* - Find streaming algorithms and references to their applications. The question is can we only use queries defined in \cite{mendes2009performance}
+
+- Keen.io like ingest use case
+- Twitter Top-K hash tags
+
+
+# Experiment Setup
+
+In this section we describe the implementation of benchmarking framework we defined in Section \ref{benchmarking-framework-and-methodology}. Rest of the section describes how stream processing platforms are selected, hardware and software configurations, stream processing algorithm related configurations and details on tuning specific stream processing platform.
+
+Across all the stream processing platforms, we use Kafka as the data stream source and all the incoming messages are thrift encoded except for cases we have specifically mentioned. *If we need to convince the use of Kafka, [this](https://cwiki.apache.org/confluence/display/KAFKA/Powered+By) is a good resource.
