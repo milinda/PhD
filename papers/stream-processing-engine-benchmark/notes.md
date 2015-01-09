@@ -70,6 +70,22 @@ Similar queries have widely different performance on the same or different engin
 - Thumbling
 - Landmark
 
+## Data In Flight
+
+- Web apps produce data at colossal rates, and those rates compound every year as the web becomes central to our lives.
+- Rapidly expanding part of our day-to-day experience
+- Not enough to keep up with the twin demands of rising throughput and decreasing latency
+- The streaming query engine is a new technology that excels in processing rapidly flowing data and producing results with low latency
+- To answer that question, it helps to look at its pedigree
+
+## Inspirations from 'How Well Do Graph-Processing Platforms Perform'
+
+- Increasing use of stream processing
+- How they are used
+- But problem are diverse and solution space is also diverse
+- Say exec time, throughput etc. depends on characteristics of the problem
+- Figuring out
+
 # Resources
 
 * [Near realtime, streaming, and perpetual analytics](http://radar.oreilly.com/2013/07/near-realtime-streaming-and-perpetual-analytics.html)
