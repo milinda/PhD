@@ -16,7 +16,7 @@ Query optimizations can happen in both steps 2 and 3. Logical query plan will be
 * Union (∪), Intersection (∩), Difference (-)
 * Selection (σ)
 * Projection (π)
-* Join ()
+* Join (⨝)
 * Duplicate Elimination (δ)
 * Grouping and Aggegation (γ)
 * Sorting (τ)
