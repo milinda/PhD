@@ -1,0 +1,192 @@
+
+
+\documentclass[10pt, conference, compsocconf]{IEEEtran}
+
+\usepackage{color,soul}
+\usepackage{listings}
+\usepackage{hyperref}
+\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+\lstset{frame=lines}
+
+\ifCLASSINFOpdf
+  % \usepackage[pdftex]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../pdf/}{../jpeg/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\else
+  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
+  % will default to the driver specified in the system graphics.cfg if no
+  % driver is specified.
+  % \usepackage[dvips]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../eps/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.eps}
+\fi
+
+
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+%
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{SamzaSQL: Open Source Distributed Fast Data Management System}
+
+
+% author names and affiliations
+% use a multiple column layout for up to two different
+% affiliations
+
+% \author{\IEEEauthorblockN{Milinda Pathirage\IEEEauthorrefmark{1} and
+% Beth Plale\IEEEauthorrefmark{2}}
+% \IEEEauthorblockA{School of Informatics and Computing,
+% Indiana University\\
+% Email: \IEEEauthorrefmark{1}mpathira@indiana.edu,
+% \IEEEauthorrefmark{2}plale@cs.indiana.edu}
+% \and
+% \IEEEauthorblockN{Yi Pan\IEEEauthorrefmark{3} and
+% Chris Riccomini \IEEEauthorrefmark{4}}
+% \IEEEauthorblockA{LinkedIn\\
+% Email: \IEEEauthorrefmark{3}yipan@linkedin.com,
+% \IEEEauthorrefmark{4}criccomini@linkedin.com}
+% \and
+% \IEEEauthorblockN{Julian Hyde\IEEEauthorrefmark{5}}
+% \IEEEauthorblockA{Hortonworks\\
+% Email: \IEEEauthorrefmark{5}julian@hydromatic.net}
+% }
+
+\author{
+    \IEEEauthorblockN{Milinda Pathirage\IEEEauthorrefmark{1}, Yi Pan\IEEEauthorrefmark{2}, Chris Riccomini\IEEEauthorrefmark{2}, Julian Hyde\IEEEauthorrefmark{3} and Beth Plale\IEEEauthorrefmark{1}}
+    \IEEEauthorblockA{\IEEEauthorrefmark{1}School of Informatics and Computing, Indiana University
+    \\\{mpathira, plale\}@indiana.edu}
+    \IEEEauthorblockA{\IEEEauthorrefmark{2}LinkedIn
+    \\\{yipan, criccomini\}@linkedin.com}
+    \IEEEauthorblockA{\IEEEauthorrefmark{2}Hortonworks
+    \\julian@hydromatic.net}
+}
+
+% make the title area
+\maketitle
+
+
+\begin{abstract}
+In a data-driven economy, it's important act on data as it arrives to stay competitive. Specialized message queues like Kafka and specialized streaming processing platforms like Apache Samza was invented to take value out of fast data. But these system still lacks support for standard querying capabilities which is available in \textit{Big Data} processing systems like \textit{Hive} or \textit{Presto}. In this paper, we describe a SQL based streaming data querying and manipulation framework implemented on top of Apache Samza -- a open source stream processing framework.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Big Data; SQL; Streaming;
+
+\end{IEEEkeywords}
+
+
+% For peer review papers, you can put extra information on the cover
+% page as needed:
+% \ifCLASSOPTIONpeerreview
+% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
+% \fi
+%
+% For peerreview papers, this IEEEtran command inserts a page break and
+% creates the second title. It will be ignored for other modes.
+\IEEEpeerreviewmaketitle
+
+
+
+\section{Introduction}
+In today's data-driven economy, organisations -- whether \textit{big} or \textit{small} -- depends on data analytics to stay competitive. Advancements in \textit{Big Data} related technologies such as Hadoop have transformed how organisations interact with data by enabling analysis of petabytes of data using commodity clusters. Often these massive quantities of data is created by events occuring thousands to tens of thousands of times per second. We these data generation rates we not only talks about volume of data, we also talks about velocity of data. To get the most out of this data we have to act on this data as it arrives. Couple of years ago, it was impracticle to act on data as it arrives due to higher latencies of Big Data processing tools and cost of specialized software and hardware. 
+
+As a result,  message queues and stream processing systems like \textit{Kafka}, \textit{Apache S4}, \textit{Apache Storm} and \textit{Apache Samza} which are robust, fault tolerant and scalable were invented to take most out of the fast moving data. These systems allows us to act on data as it arrives, generating value to both organisations and users which wasn't possible half a decade ago at this scale.
+
+While it is important to act on data as it arrives, it is also important for these fast data processing pipelines to interact with static data or output data from batch jobs for the purpose of data enrichment or near real-time analysis. Reference architecture known as Lambda Architecture was proposed as a solution to this hybrid analytics requirements and there are implementations of this architecture such as Summingbird \cite{boykin2014summingbird} and RADStack \cite{metamarkets:radstack} in use today. Instead of widely used declarative language like SQL, these frameworks including Summingbird provide low level APIs in languages like Java or custom query languages specific for the framework. But custom programs written for specific purposes add maitenance overhead and often hard to reuse. And custom query languages doesn't have the adavantages of extensions to standard SQL such as 
+
+\begin{itemize}
+\item easy to learn if you know SQL
+\item clear semantics 
+\item allows combining stored relaitons and streams in a single query
+\end{itemize}
+
+In this paper, we present \textit{SamzaSQL}, an open-source SQL based  streaming query engine implementation with support for interacting with non-streaming data sources on top of Apache Samza. SamzaSQL supports queries expressed in standard SQL with minor extensions to add stream producing and windowing capabilities. These queries get compiled into streaming jobs executed in Samza. Depending on the query, these streaming jobs may involve access to static data sources such as stored relations and may access outputs from recurring batch jobs. SamzaSQL front-end, which does query parsing, validation and planning is built on top of \textit{Apache Calcite} and supports querying stream data formats such as Avro or JSON. SamzaSQL also includes support for pluggable catalogs or schema registries based on Calcite's schema factory functionality. This allows us to extend SamzaSQL to support various data sources with custom formats. SamzaSQL's streaming query execution layer is implemented based on CQL \cite{arasu2006cql} continuous query execution model.
+
+Until now, we have used custom programs or data processing pipelines built on APIs provided by streaming and batch data processing frameworks or programming models such as Summingbird \cite{boykin2014summingbird} to build Lambda or Kappa architecture style applications. General motivation of this work is to explore how we can provide a unified framework -- which enables both Lambda Architecture and Kappa architecture style data processing pipelines based on well known SQL related standards and continuous query execution model presented in CQL \cite{arasu2006cql}. \hl{TODO: Revisit this because window operator design proposed by Yi may need us to make changes to query execution model.}
+
+Windowing is a core and central concept of stream querying due to the fact that operators like \textit{join} and some of the aggregations cannot be evaluated over unbounded streams. SamzaSQL comes with a widow operator implementation with supports for 
+
+\begin{itemize}
+\item timely and deterministic window output under unpredictable message delevery latencies
+\item and, deterministic window output with node failures and message re-delivery
+\end{itemize}
+
+\hl{TODO: We are mainly targeting soft and near real-time systems. We need to describe this. Also we need to discuss about partition based parallelism supported.}
+
+\section{SamzaSQL}
+SamzaSQL is a streaming query layer on top of Apache Samza stream processing framework and utilizes Apache Calcite \cite{asf:2014:calcite} for query planning. 
+
+\subsection{Data Model}
+
+\begin{itemize}
+\item Streams - A stream is a (possibly infinite) sequence of elements. By default, each stream in Samza has a corresponding Kafka \cite{kreps2011kafka} topic. There can be multiple partitions for each topic in a Kafka cluster. A element of a stream/topic can be in any format (Generally, elements in the same topic is in same data format). Users can associate stream with the serialization format of the underlying data. SamzaQL provides support for several serialization formats such as Avro, JSON and users can also add new serialization formats by implementing \textit{SerdeFactory} and \textit{Data} interfaces. In the current version, Kafka Schema Registry based Calcite Schema implementation provides stream meta-data necessary to query compilation and planning.
+\item Partitions - Each partition is an ordered, immutable sequence of messages that is continually appended to a commit log. The elements in the partitions are each assigned a sequential id number called the offset that uniquely identifies each element within the partition. SamzaQL guarantees the ordering of elements within the partition, but not inbetween partitions.
+\item Tables - Analogous to tables in relational databases, but not limited only to relational databases. \textit{Tables} in SamzaQL can refer to any static data source such as \textit{HBase} table, \textit{Espresso} table  which is exposed to SamzaQL environment as relational table. \textit{TODO: Describe semantics little bit more. May need to consider partitions of tables too.}
+\end{itemize}
+
+SamzaQL supports primitive column types (integers, floating
+point numbers, generic strings, dates and booleans) and
+nestable collection types - array, map and object. Users can also define their own types via Calcite's JavaType which allows use of a Java Class as a type.
+
+\subsection{Query Language}
+SamzaQL supports standard SQL with extensions for stream queries. Data definition (DDL) statements are not supported at this stage and SamzaQL depends on Kafka schema registry and Calcite schema models to provide metadata about streams and tables to the query compiling and planning phase. Custom serialization formats are supported through Calcite's schema models.
+Streams in SamzaQL is immutable and append only, so update and delete operations are not supported on streams. SamzaQL also supports user defined functions for data transformation and aggregations via a Java API.
+
+Streaming specific extensions were added to standard SQL supported by Calcite to support \textit{relation-to-stream} transformation, flexible window specification and stream partitioning.
+
+\begin{itemize}
+\item \textbf{Relation-to-stream transformation}: Following CQL \cite{arasu2006cql} continuous query execution model, SamzaQL first transform the stream into a \textit{time-varying relation} based on the windows specification in the query or using defaults. And query body is executed on this/these time-varying relation/s. So to convert the time-varying relations results from query execution to streams, we use three basic operations  \textit{ISTREAM}, \textit{DSTREAM} and \textit{RSTREAM} from CQL. To support this, we have extended SQL \textit{SELECT} statement with \textit{STREAM},\\ \textit{DSTREAM} and \textit{RSTREAM} keywords which should come right after \textit{SELECT} keyword like below.
+
+\begin{lstlisting}[language=SQL]
+SELECT [STREAM | DSTREAM | RSTREAM] ... FROM ...
+\end{lstlisting}
+
+\item \textbf{Window Specification}: This is sitll under discussion. But there are some special cases we need to support except well known \textit{tumbling}, \textit{sliding} and \textit{hopping} windows. e.g. Consider that we want to have a count of stock trades (as a infinite stream) happened in the last hour, but only every 11min. It is easy to write the first part in sqlstream as:
+
+\begin{lstlisting}[language=SQL]
+SELECT STREAM rowtime, count(*) 
+              OVER (ORDER BY rowtime RANGE INTERVAL '1' HOUR PROCEDING)
+  FROM Trades
+\end{lstlisting}
+The above will create a stream of counts that happened every hour continuously as rows are scanned
+
+Now here is the question:
+\begin{itemize}
+\item How do we have the count every 11min instead of as the row comes in?
+\item If there is no row in Trades between 12:00pm to 2:00pm, how do we tell the system to still generate 0 counts for the time moments: 12:11pm, 12:22pm, 12:33pm, etc.? Or, those rows are delayed in the delivery in the system and user wants to ignore late-arrival of messages after 5min timeout to close the counting window? How can we support that use case w/o breaking SQL grammar?
+\end{itemize}
+
+\item \textbf{Stream Partitioning}: Not yet decided on how to integrate partitioning. But requirements are as follows:
+\begin{itemize}
+\item On the producer-side (when inserting query results to a stream), we have no way to determine which key to use for partitioning and how many partitions an output stream should be right now. So there should be a way to specify this in query.
+\end{itemize}
+
+\end{itemize}
+
+In addition to this, there are situations where queries which are valid in the context of relation databases are no longer valid in streaming scenarios due to non-blocking nature of streaming queries. So, we need to extend Calcite with custom validation queries. These things are still under discussion.
+
+\subsection{Windowing}
+\subsection{Aggregates}
+\subsection{Joins}
+
+
+
+
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,references}
+
+% that's all folks
+\end{document}
+
+
