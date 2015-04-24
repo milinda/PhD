@@ -34,3 +34,7 @@ Even though Kappa architecture sounds promising, but adding a SQL layer in-front
 - Discuss different requirements. Latency requirements and what is special about these tasks.
 - Then discuss about current approaches and their problems. Current approaches include Lambda Architecture and Kappa Architecture.
 
+## Trill
+
+- Lack of a unified data model and semantics precludes reusing logic accross tools, developing queries on historical data and then deploying them directly to live streams.
+
