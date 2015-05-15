@@ -1,0 +1,3 @@
+# Future Work
+
+Relational database knows number of rows in each table, number of pages, number of distinct key value, index size, index height and index range. These information is stored in db catalog. So its easy to optimize because enough information is available. But its not the case for streaming database. We need to continuously provide feedback to query planner if possible or we need to use heuristics or rough estimates to drive the optimizer.
