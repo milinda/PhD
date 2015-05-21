@@ -1,12 +1,22 @@
 # Related Work
 
+## Samza SQL Uniqueness
+
+* Developed on top of Stateful Stream Processing Model
+* Supports standard SQL with minimal set of extensions
+* Support revinding
+* Support fault tolerance and checkpointing
+* Data Parallel
+
 - Liquid
 - Summingbird
 - Druid
 - RADStack
 - SparkSQL
 - Stream aggregation literature and window handling literature
+- CQL
 - Trill
+- Photon
 
 We have to show that all the query examples from previous streaming literature is possible in our language too without modifications to SQL.
 
@@ -63,4 +73,44 @@ three step crash recovery
 - marking all SP archives self-consistent with each other and the latest committed data from their underlying arhcive and therefore the archive of the raw stream
 - rebuilding the runtime state of the various operators in the CQ executor
 
+# Liquid
 
+From: http://blog.acolyer.org/2015/02/04/liquid-unifying-nearline-and-offline-big-data-integration/
+
+Web companies such as LinkedIn are dealing with very high volumes of append-only data, “which becomes expensive to integrate using proprietary, often hard-to-scale data warehouses.” (See Mesa for Google’s solution to the data-warehousing problem). So organizations create their own data integration stacks for storing data and serving it to back-end data processing systems.
+
+Examples of nearline systems include those that query social graphs, search data, normalize data, or monitor change. The sooner they provide results, the higher the value to end users. With multiple stages in processing pipelines, the latency per stage starts to add up.
+
+Additional issues the authors cite with the DFS based approach include the need to support incremental processing (fine-grained access to data and explicit incremental state), and the need for resource isolation:
+
+Liquid is designed for low latency, cost-effective, incremental processing with high availability and resource isolation. “It annotates data with metadata such as timestamps or software versions, which back-end systems can use to read from a given point. This rewindability property is a crucial building block for incremental processing and failure recovery.”
+
+**The well-known Lambda architecture was rejected since “developers must write, debug, and maintain the same processing code for both the batch and stream layers, and the Lambda architecture increases the hardware footprint.” Likewise the Kappa architecture, while it requires only a single processing path, “has a higher storage footprint, and applications access stale data while the system is re-processing data.”**
+
+Liquid has two cooperating layers: a messaging layer based on Apache Kafka, and a processing layer based on Apache Samza.
+
+The layers communicate through feeds (topics in a pub/sub model). There are raw data feeds, and derived data feeds – the latter contain lineage information which is stored by the messaging layer.
+
+Topics are divided into partitions, which are distributed across a cluster of brokers. Topics are realized as distributed commit logs – each partition is append-only and keeps an ordered, immutable sequence of messages with a unique identifier called an offset.
+
+Consumers can checkpoint their last consumed offsets to save their progress and facilitate recovery.
+
+The processing layer executes jobs, which embody computation over streams. Jobs can be divided into tasks that process different partitions of a topic in parallel. Jobs can communicate with each other, forming a dataflow processing graph.
+
+**The processing layer (i) executes ETL-like jobs for different back-end systems according to a stateful stream processing model; (ii) guarantees service levels through resource isolation; (iii) provides low latency results; and (iv) enables incremental data processing. A messaging layer supports the processing layer. It (i) stores high-volume data with high availability; and (ii) offers rewindability, i.e. the ability to access data through metadata annotations.**
+
+# StremaSQL for Spark
+
+https://spark-summit.org/2014/talk/streamsql-on-spark-manipulating-streams-by-sql-using-spark
+
+# Trill
+
+# Photon and Mill Wheel
+
+# Existing Streaming SQL Standards
+
+We have to talk about languages proposed by following papers and why we choose our language
+
+- CQL
+- Towards a Streaming SQL Standard (http://cs.brown.edu/~ugur/streamsql.pdf)
+- ATLAS: a Small but Complete SQL Extension for Data Mining and Data Streams (http://www.vldb.org/conf/2003/papers/S37P01.pdf)
